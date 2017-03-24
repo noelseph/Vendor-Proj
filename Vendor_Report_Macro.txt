@@ -12,13 +12,6 @@ Sub Copy_To_Worksheets()
     Dim ErrNum As Long
     On Error GoTo Errorcatch
     
-    
-
-    'Set filter range on ActiveSheet: A1 is the top left cell of your filter range
-    'and the header of the first column, D is the last column in the filter range.
-    'You can also add the sheet name to the code like this :
-    'Worksheets("Sheet1").Range("A1:D" & LastRow(Worksheets("Sheet1")))
-    'No need that the sheet is active then when you run the macro when you use this.
     Set My_Range = Range("A1:O" & LastRow(ActiveSheet))
     My_Range.Parent.Select
 
@@ -31,8 +24,8 @@ Errorcatch:
         MsgBox Err.Description
     End If
 
-    'This example filters on the first column in the range(change the field if needed)
-    'In this case the range starts in A so Field:=1 is column A, 2 = column B, ......
+    'This example filters on the first column in the range
+    'In this case Field:=1 is column A, 2 = column B, ......
     FieldNum = 1
 
     'Turn off AutoFilter
@@ -53,7 +46,7 @@ Errorcatch:
     Set ws2 = Worksheets.Add
 
     With ws2
-        'first we copy the Unique data from the filter field to ws2
+        'first we copy Unique data from the filter field to ws2
         My_Range.Columns(FieldNum).AdvancedFilter _
                 Action:=xlFilterCopy, _
                 CopyToRange:=.Range("A1"), Unique:=True
